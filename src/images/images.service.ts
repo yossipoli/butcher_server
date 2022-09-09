@@ -1,3 +1,5 @@
+/* eslint-disable */
+import { Products } from './../products/products.entity';
 import { Repository } from 'typeorm';
 import { Images } from './Images.entity';
 import { Injectable } from '@nestjs/common';
@@ -7,20 +9,21 @@ import { InjectRepository } from '@nestjs/typeorm';
 export class ImagesService {
   constructor(
     @InjectRepository(Images)
-    private productsRepository: Repository<Images>,
+    private imagesRepository: Repository<Images>,
   ) {}
 
-  async getAllPictures(id: number) {
-    return await this.productsRepository.find({
+  async getAllPictures(_id: number) {
+    return await this.imagesRepository.find({
       select: ['src'],
-      where: [{ id: id }],
+      where: [{ product_id: _id }],
+      // relations: ['products'],
     });
   }
 
   async getFirstPicture(id: number) {
-    return await this.productsRepository.findOne({
+    return await this.imagesRepository.findOne({
       select: ['src'],
-      where: [{ id: id }],
+      where: [{ product_id: id }],
     });
   }
 }

@@ -1,3 +1,5 @@
+/* eslint-disable */
+import { Images } from './../images/images.entity';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { Products } from './products.entity';
 import { Module } from '@nestjs/common';

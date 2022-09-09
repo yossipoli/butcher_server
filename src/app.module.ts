@@ -1,3 +1,4 @@
+/* eslint-disable */
 import { Customers } from './customers/customers.entity';
 import { Module } from '@nestjs/common';
 import { AppController } from './app.controller';
@@ -20,8 +21,8 @@ import { ImagesModule } from './images/images.module';
       username: process.env.DB_USERNAME,
       password: process.env.PASSWORD,
       database: process.env.DB,
-      // "entities": ["src/**/**.entity{.ts,.js}"],
-      entities: [Customers, Products],
+      entities: ['dist/**/*.entity{.ts,.js}'],
+      // entities: [Customers, Products, Images],
       synchronize: true,
     }),
     CustomersModule,
