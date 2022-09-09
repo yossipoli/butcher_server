@@ -23,7 +23,7 @@ import { ImagesModule } from './images/images.module';
       database: process.env.DB,
       entities: ['dist/**/*.entity{.ts,.js}'],
       // entities: [Customers, Products, Images],
-      synchronize: true,
+      synchronize: false,
     }),
     CustomersModule,
     ProductsModule,
