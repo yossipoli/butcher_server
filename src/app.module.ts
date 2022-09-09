@@ -10,6 +10,7 @@ import { ConfigModule } from '@nestjs/config';
 import { ProductsModule } from './products/products.module';
 import { Products } from './products/products.entity';
 import { ImagesModule } from './images/images.module';
+import { CategoriesModule } from './categories/categories.module';
 
 @Module({
   imports: [
@@ -22,12 +23,13 @@ import { ImagesModule } from './images/images.module';
       password: process.env.PASSWORD,
       database: process.env.DB,
       entities: ['dist/**/*.entity{.ts,.js}'],
-      // entities: [Customers, Products, Images],
+      // entities: [Customers, Products, Images, Categories],
       synchronize: false,
     }),
     CustomersModule,
     ProductsModule,
     ImagesModule,
+    CategoriesModule,
   ],
   controllers: [AppController],
   providers: [AppService],

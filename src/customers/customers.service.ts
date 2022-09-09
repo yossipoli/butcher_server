@@ -7,7 +7,7 @@ import { Repository } from 'typeorm';
 export class CustomersService {
   constructor(
     @InjectRepository(Customers)
-    private customersRepository: Repository<Customers>,
+    private customersRepository: Repository<Customers>
   ) {}
 
   async getCustomers(): Promise<Customers[]> {
