@@ -1,3 +1,4 @@
+/* eslint-disable */
 import { Products } from './products.entity';
 import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';

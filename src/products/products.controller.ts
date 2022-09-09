@@ -1,3 +1,4 @@
+/* eslint-disable */
 import { ProductsService } from './products.service';
 import { Controller, Get, Param } from '@nestjs/common';
 
@@ -11,7 +12,7 @@ export class ProductsController {
   }
 
   @Get(':id')
-  getProduct(@Param() params) {
-    return this.productService.getProduct(+params.id);
+  getProduct(@Param() param) {
+    return this.productService.getProduct(+param.id);
   }
 }
