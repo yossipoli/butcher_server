@@ -1,3 +1,4 @@
+/* eslint-disable */
 import { Customers } from './customers.entity';
 import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
@@ -7,7 +8,7 @@ import { Repository } from 'typeorm';
 export class CustomersService {
   constructor(
     @InjectRepository(Customers)
-    private customersRepository: Repository<Customers>
+    private customersRepository: Repository<Customers>,
   ) {}
 
   async getCustomers(): Promise<Customers[]> {
@@ -20,6 +21,13 @@ export class CustomersService {
     return await this.customersRepository.find({
       select: ['first_name', 'last_name', 'email', 'phone', 'city', 'address'],
       where: [{ id: _id }],
+    });
+  }
+
+  async getCustomerByEmail(_email: string): Promise<Customers | undefined> {
+    return await this.customersRepository.findOne({
+      select: ['id', 'email', 'password'],
+      where: [{email: _email}],
     });
   }
 

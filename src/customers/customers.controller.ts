@@ -1,3 +1,4 @@
+/* eslint-disable */
 import { Customers } from './customers.entity';
 import { CustomersService } from './customers.service';
 import {
@@ -9,6 +10,9 @@ import {
   ParseIntPipe,
   Post,
   Put,
+  Response,
+  Session,
+  Req,
 } from '@nestjs/common';
 
 @Controller('customers')
@@ -23,6 +27,11 @@ export class CustomersController {
   @Get()
   getAll() {
     return this.customersService.getCustomers();
+  }
+
+  @Post()
+  login(@Session() session: Record<string, any>/*, @Req() req: Request*/) {
+    return true
   }
 
   //   @Post()
