@@ -1,3 +1,4 @@
+/* eslint-disable */
 import { Categories } from './entities/category.entity';
 import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';

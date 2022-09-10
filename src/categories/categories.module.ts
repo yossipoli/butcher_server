@@ -1,3 +1,4 @@
+/* eslint-disable */
 import { Categories } from './entities/category.entity';
 import { Module } from '@nestjs/common';
 import { CategoriesService } from './categories.service';
