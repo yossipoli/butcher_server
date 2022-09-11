@@ -22,6 +22,29 @@ export class CartsController {
   //   return this.cartsService.create(createCartDto);
   // }
 
+  @Post('add')
+  add(
+    @Req() req: Request,
+    @Body()
+    product: {
+      product_id: number;
+      amount: number;
+      last_update: Date;
+    },
+  ) {
+    return req.cookies.user_id
+      ? this.cartsService.add({
+          ['customer_id']: +req.cookies.user_id,
+          ...product,
+        })
+      : 'Not Connected';
+  }
+
+  @Post('remove')
+  remove(@Req() req: Request, @Body() productId: number) {
+    return this.cartsService.remove(req.cookies.user_id, +productId);
+  }
+
   @Get('all')
   findAll() {
     return this.cartsService.findAll();
