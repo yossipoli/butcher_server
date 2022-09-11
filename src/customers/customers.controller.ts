@@ -10,29 +10,44 @@ import {
   ParseIntPipe,
   Post,
   Put,
-  Response,
-  Session,
   Req,
+  Res,
+  Session,
 } from '@nestjs/common';
+
+import {Request, Response} from 'express'
 
 @Controller('customers')
 export class CustomersController {
   constructor(private readonly customersService: CustomersService) {}
 
-  @Get(':id')
-  get(@Param() params) {
-    return this.customersService.getCustomer(+params.id);
+  @Get('check-cookie')
+  check(@Req() req: Request) {
+    return req.cookies.user_id ? true : false;
   }
 
-  @Get()
+  @Get('/all')
   getAll() {
     return this.customersService.getCustomers();
   }
 
+  @Get()
+  get(@Req() req: Request) {
+    return this.customersService.getCustomer(+req.cookies.user_id);
+  }
+
   @Post()
-  login(@Session() session: Record<string, any>/*, @Req() req: Request*/) {
+  login() {
     return true
   }
+
+  @Get('logout')
+  logout(@Res() res: Response) {
+    res.clearCookie('user_id')
+    res.send()
+  }
+
+ 
 
   //   @Post()
   //   create(@Body() customer: Customer) {
