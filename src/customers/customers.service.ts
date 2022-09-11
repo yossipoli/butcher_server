@@ -17,8 +17,8 @@ export class CustomersService {
     });
   }
 
-  async getCustomer(_id: number): Promise<Customers[]> {
-    return await this.customersRepository.find({
+  async getCustomer(_id: number): Promise<Customers> {
+    return await this.customersRepository.findOne({
       select: ['first_name', 'last_name', 'email', 'phone', 'city', 'address'],
       where: [{ id: _id }],
     });
@@ -27,7 +27,7 @@ export class CustomersService {
   async getCustomerByEmail(_email: string): Promise<Customers | undefined> {
     return await this.customersRepository.findOne({
       select: ['id', 'email', 'password'],
-      where: [{email: _email}],
+      where: [{ email: _email }],
     });
   }
 
