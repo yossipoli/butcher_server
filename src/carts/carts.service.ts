@@ -16,6 +16,22 @@ export class CartsService {
   //   return 'This action adds a new cart';
   // }
 
+  async add(product) {
+    const row = await this.cartsRepository.findOne({
+      where: [
+        { customer_id: product.customer_id, product_id: product.product_id },
+      ],
+    });
+    if (!row) {
+      this.cartsRepository.save(product);
+    } else {
+      this.cartsRepository.save({
+        ...product,
+        ['amount']: product.amount + row.amount,
+      });
+    }
+  }
+
   findAll() {
     return `This action returns all carts`;
   }
@@ -30,7 +46,10 @@ export class CartsService {
   //   return `This action updates a #${id} cart`;
   // }
 
-  // remove(id: number) {
-  //   return `This action removes a #${id} cart`;
-  // }
+  async remove(_customer_id: number, _product_id: number) {
+    const row = await this.cartsRepository.findOne({
+      where: [{ customer_id: _customer_id, product_id: _product_id }],
+    });
+    this.cartsRepository.remove(row);
+  }
 }
