@@ -46,10 +46,12 @@ export class CartsService {
   //   return `This action updates a #${id} cart`;
   // }
 
-  async remove(_customer_id: number, _product_id: number) {
-    const row = await this.cartsRepository.findOne({
-      where: [{ customer_id: _customer_id, product_id: _product_id }],
-    });
-    this.cartsRepository.remove(row);
+  async remove(customer_id: number, product_id: number) {
+    console.log(customer_id, typeof customer_id, product_id, typeof product_id);
+    // const row = await this.cartsRepository.findOne({
+    // where: [{ customer_id: _customer_id, product_id: _product_id }],
+    // });
+    // this.cartsRepository.delete(row);
+    this.cartsRepository.delete({ customer_id, product_id });
   }
 }

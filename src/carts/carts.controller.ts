@@ -41,8 +41,8 @@ export class CartsController {
   }
 
   @Post('remove')
-  remove(@Req() req: Request, @Body() productId: number) {
-    return this.cartsService.remove(req.cookies.user_id, +productId);
+  remove(@Req() req: Request, @Body('product_id') productId: number) {
+    return this.cartsService.remove(+req.cookies.user_id, +productId);
   }
 
   @Get('all')
