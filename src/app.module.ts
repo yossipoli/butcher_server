@@ -12,6 +12,7 @@ import { Products } from './products/products.entity';
 import { ImagesModule } from './images/images.module';
 import { CategoriesModule } from './categories/categories.module';
 import { CartsModule } from './carts/carts.module';
+import { OrdersModule } from './orders/orders.module';
 
 @Module({
   imports: [
@@ -32,6 +33,7 @@ import { CartsModule } from './carts/carts.module';
     ImagesModule,
     CategoriesModule,
     CartsModule,
+    // OrdersModule,
   ],
   controllers: [AppController],
   providers: [AppService],
