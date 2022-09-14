@@ -40,10 +40,10 @@ export class CartsController {
       : 'Not Connected';
   }
 
-  @Post('remove')
-  remove(@Req() req: Request, @Body('product_id') productId: number) {
-    return this.cartsService.remove(+req.cookies.user_id, +productId);
-  }
+  // @Post('remove')
+  // remove(@Req() req: Request, @Body('product_id') productId: number) {
+  //   return this.cartsService.remove(+req.cookies.user_id, +productId);
+  // }
 
   @Get('all')
   findAll() {
@@ -60,8 +60,8 @@ export class CartsController {
   //   return this.cartsService.update(+id, updateCartDto);
   // }
 
-  // @Delete(':id')
-  // remove(@Param('id') id: string) {
-  //   return this.cartsService.remove(+id);
-  // }
+  @Delete(':id')
+  remove(@Param('id') id: string) {
+    return this.cartsService.remove(1, 1); //(+id);
+  }
 }

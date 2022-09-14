@@ -1,3 +1,5 @@
+import { CustomersModule } from './../customers/customers.module';
+import { Customers } from './../customers/customers.entity';
 import { NestModule } from '@nestjs/common/interfaces';
 import { Carts } from './entities/cart.entity';
 import { TypeOrmModule } from '@nestjs/typeorm';
@@ -6,7 +8,7 @@ import { CartsService } from './carts.service';
 import { CartsController } from './carts.controller';
 
 @Module({
-  imports: [TypeOrmModule.forFeature([Carts])],
+  imports: [TypeOrmModule.forFeature([Carts]), CustomersModule],
   controllers: [CartsController],
   providers: [CartsService],
 })

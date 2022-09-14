@@ -18,9 +18,7 @@ export class CartsService {
 
   async add(product) {
     const row = await this.cartsRepository.findOne({
-      where: [
-        { customer_id: product.customer_id, product_id: product.product_id },
-      ],
+      where: [{ customer: product.customer_id, product: product.product_id }],
     });
     if (!row) {
       this.cartsRepository.save(product);
@@ -36,9 +34,10 @@ export class CartsService {
     return `This action returns all carts`;
   }
 
-  findOne(_id) {
+  findOne(customerId) {
     return this.cartsRepository.find({
-      where: [{ customer_id: _id }],
+      where: [{ customerId }],
+      relations: { customer: false, product: true },
     });
   }
 
@@ -46,12 +45,8 @@ export class CartsService {
   //   return `This action updates a #${id} cart`;
   // }
 
-  async remove(customer_id: number, product_id: number) {
-    console.log(customer_id, typeof customer_id, product_id, typeof product_id);
-    // const row = await this.cartsRepository.findOne({
-    // where: [{ customer_id: _customer_id, product_id: _product_id }],
-    // });
-    // this.cartsRepository.delete(row);
-    this.cartsRepository.delete({ customer_id, product_id });
+  async remove(customerId: number, productId: number) {
+    // return this.cartsRepository.delete({ customerId, productId });
+    return 'none';
   }
 }

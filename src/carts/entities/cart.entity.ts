@@ -1,12 +1,29 @@
-import { Column, CreateDateColumn, Entity, PrimaryColumn } from 'typeorm';
+import { Products } from './../../products/products.entity';
+import { Customers } from './../../customers/customers.entity';
+import {
+  Column,
+  CreateDateColumn,
+  Entity,
+  JoinColumn,
+  ManyToOne,
+  PrimaryColumn,
+} from 'typeorm';
 
 @Entity()
 export class Carts {
   @PrimaryColumn()
-  customer_id: number;
+  customerId: number;
+
+  @JoinColumn()
+  @ManyToOne(() => Customers, (customer) => customer.id)
+  customer: Customers;
 
   @PrimaryColumn()
-  product_id: number;
+  ProductId: number;
+
+  @JoinColumn()
+  @ManyToOne(() => Products, (product) => product.id)
+  product: Products;
 
   @Column()
   amount: number;

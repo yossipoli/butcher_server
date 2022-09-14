@@ -1,10 +1,16 @@
+import { Carts } from './../carts/entities/cart.entity';
+import { Orders } from './../orders/entities/orders.entity';
 /* eslint-disable */
-import { Entity, Column, PrimaryGeneratedColumn } from 'typeorm';
+import { Entity, Column, PrimaryGeneratedColumn, OneToMany, ManyToMany } from 'typeorm';
 
 @Entity()
 export class Customers {
   @PrimaryGeneratedColumn()
   id: number;
+  @OneToMany(() => Orders, (order) => order.customer)
+  orders: Orders[];
+  @OneToMany(() => Carts, (cart) => cart.customer)
+  carts: Carts[];
 
   @Column({ length: 15 })
   first_name: string;
