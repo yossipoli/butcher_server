@@ -11,9 +11,9 @@ export class CategoriesService {
     private categoriesRepository: Repository<Categories>,
   ) {}
 
-  // findAll() {
-  //   return `This action returns all categories`;
-  // }
+  findAll() {
+    return this.categoriesRepository.find();
+  }
 
   findOne(_name: string) {
     return this.categoriesRepository.findOne({
