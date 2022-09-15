@@ -46,7 +46,6 @@ export class CartsService {
   // }
 
   async remove(customerId: number, productId: number) {
-    // return this.cartsRepository.delete({ customerId, productId });
-    return 'none';
+    return this.cartsRepository.delete({ customerId, productId });
   }
 }

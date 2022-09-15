@@ -7,6 +7,7 @@ import {
   Column,
   OneToMany,
   ManyToOne,
+  JoinColumn,
 } from 'typeorm';
 @Entity()
 export class Products {
@@ -16,8 +17,9 @@ export class Products {
   @Column({ length: 30 })
   name: string;
 
-  // @Column()
-  // category_id: number;
+  @Column()
+  categoryId: number;
+  @JoinColumn()
   @ManyToOne(() => Categories, (categories) => categories.id)
   category: Categories[];
 
@@ -30,6 +32,8 @@ export class Products {
   @Column({ length: 1000, nullable: true })
   description: string;
 
+  // @Column()
+  // @JoinColumn()
   @OneToMany(() => Images, (images) => images.product_id)
   images: Images[];
 }

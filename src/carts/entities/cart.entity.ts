@@ -13,14 +13,12 @@ import {
 export class Carts {
   @PrimaryColumn()
   customerId: number;
-
   @JoinColumn()
   @ManyToOne(() => Customers, (customer) => customer.id)
   customer: Customers;
 
   @PrimaryColumn()
-  ProductId: number;
-
+  productId: number;
   @JoinColumn()
   @ManyToOne(() => Products, (product) => product.id)
   product: Products;
