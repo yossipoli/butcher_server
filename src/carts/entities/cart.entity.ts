@@ -26,6 +26,9 @@ export class Carts {
   @Column()
   amount: number;
 
-  @CreateDateColumn()
-  last_update: Date;
+  @Column({
+    type: 'date',
+    default: () => 'NOW()',
+  })
+  last_update: string;
 }
