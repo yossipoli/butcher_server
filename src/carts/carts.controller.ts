@@ -29,21 +29,21 @@ export class CartsController {
     product: {
       product_id: number;
       amount: number;
-      last_update: Date;
     },
   ) {
     return req.cookies.user_id
       ? this.cartsService.add({
-          ['customer_id']: +req.cookies.user_id,
-          ...product,
+          customerId: +req.cookies.user_id,
+          productId: +product.product_id,
+          amount: +product.amount,
         })
-      : 'Not Connected';
+      : false;
   }
 
-  // @Post('remove')
-  // remove(@Req() req: Request, @Body('product_id') productId: number) {
-  //   return this.cartsService.remove(+req.cookies.user_id, +productId);
-  // }
+  @Post('remove')
+  remove(@Req() req: Request, @Body('product_id') productId: number) {
+    return this.cartsService.remove(+req.cookies.user_id, +productId);
+  }
 
   @Get('all')
   findAll() {
@@ -60,8 +60,8 @@ export class CartsController {
   //   return this.cartsService.update(+id, updateCartDto);
   // }
 
-  @Delete(':id')
-  remove(@Param('id') id: string) {
-    return this.cartsService.remove(1, 1); //(+id);
-  }
+  // @Delete(':id')
+  // remove(@Param('id') id: string) {
+  //   return this.cartsService.remove(1, 1); //(+id);
+  // }
 }

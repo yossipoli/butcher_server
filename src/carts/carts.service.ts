@@ -18,7 +18,7 @@ export class CartsService {
 
   async add(product) {
     const row = await this.cartsRepository.findOne({
-      where: [{ customer: product.customer_id, product: product.product_id }],
+      where: [{ customerId: product.customerId, productId: product.productId }],
     });
     if (!row) {
       this.cartsRepository.save(product);
@@ -28,6 +28,7 @@ export class CartsService {
         ['amount']: product.amount + row.amount,
       });
     }
+    return true;
   }
 
   findAll() {
