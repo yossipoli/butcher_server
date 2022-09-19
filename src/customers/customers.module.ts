@@ -1,3 +1,4 @@
+import { RegisterMiddleware } from './../middle_wares/register.middleware';
 import { LoginMiddleware } from './../middle_wares/login.middleware';
 import { Customers } from './customers.entity';
 import { Module, MiddlewareConsumer, RequestMethod } from '@nestjs/common';
@@ -15,6 +16,10 @@ export class CustomersModule implements NestModule {
   configure(consumer: MiddlewareConsumer) {
     consumer.apply(LoginMiddleware).forRoutes({
       path: '/customers',
+      method: RequestMethod.POST,
+    });
+    consumer.apply(RegisterMiddleware).forRoutes({
+      path: '/customers/register',
       method: RequestMethod.POST,
     });
   }
