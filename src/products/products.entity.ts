@@ -32,8 +32,6 @@ export class Products {
   @Column({ length: 1000, nullable: true })
   description: string;
 
-  // @Column()
-  // @JoinColumn()
   @OneToMany(() => Images, (images) => images.product_id)
   images: Images[];
 }

@@ -1,3 +1,4 @@
+import { Images } from './../../images/images.entity';
 import { Products } from './../../products/products.entity';
 import { Customers } from './../../customers/customers.entity';
 import {
@@ -6,6 +7,7 @@ import {
   Entity,
   JoinColumn,
   ManyToOne,
+  OneToOne,
   PrimaryColumn,
 } from 'typeorm';
 
