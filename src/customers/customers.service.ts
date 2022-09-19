@@ -1,3 +1,4 @@
+import { CreateCustomerDto } from './dto/create-customer.dto';
 /* eslint-disable */
 import { Customers } from './customers.entity';
 import { Injectable } from '@nestjs/common';
@@ -10,6 +11,11 @@ export class CustomersService {
     @InjectRepository(Customers)
     private customersRepository: Repository<Customers>,
   ) {}
+
+  async add(newCustomer: CreateCustomerDto) {
+    await this.customersRepository.save(newCustomer);
+    return true;
+  }
 
   async getCustomers(): Promise<Customers[]> {
     return await this.customersRepository.find({

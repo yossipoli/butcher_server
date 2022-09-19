@@ -1,4 +1,5 @@
 /* eslint-disable */
+import { CreateCustomerDto } from './dto/create-customer.dto';
 import { Customers } from './customers.entity';
 import { CustomersService } from './customers.service';
 import {
@@ -12,14 +13,22 @@ import {
   Put,
   Req,
   Res,
+  UsePipes,
+  ValidationPipe,
   Session,
 } from '@nestjs/common';
 
-import {Request, Response} from 'express'
+import { Request, Response } from 'express';
 
 @Controller('customers')
 export class CustomersController {
   constructor(private readonly customersService: CustomersService) {}
+
+  @Post('register')
+  @UsePipes(new ValidationPipe())
+  addCustomer(@Body() newCustomer: CreateCustomerDto) {
+    return this.customersService.add(newCustomer);
+  }
 
   @Get('check-cookie')
   check(@Req() req: Request) {
@@ -38,16 +47,14 @@ export class CustomersController {
 
   @Post()
   login() {
-    return true
+    return true;
   }
 
   @Get('logout')
   logout(@Res() res: Response) {
-    res.clearCookie('user_id')
-    res.send()
+    res.clearCookie('user_id');
+    res.send();
   }
-
- 
 
   //   @Post()
   //   create(@Body() customer: Customer) {
