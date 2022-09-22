@@ -24,10 +24,17 @@ import { Request, Response } from 'express';
 export class CustomersController {
   constructor(private readonly customersService: CustomersService) {}
 
+  @Get('email-confirm/:token')
+  async addCustomer(@Param('token') token: string, @Res() res: Response) {
+    await this.customersService.add(token)
+    return res.redirect('http://localhost:3000/login')
+  }
+
+
   @Post('register')
   @UsePipes(new ValidationPipe())
-  addCustomer(@Body() newCustomer: CreateCustomerDto) {
-    return this.customersService.add(newCustomer);
+  addCustomerToWaitingList(@Body() newCustomer: CreateCustomerDto) {
+    this.customersService.addToWaitingConfirmCustomers(newCustomer);
   }
 
   @Get('check-cookie')

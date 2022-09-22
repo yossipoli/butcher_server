@@ -1,13 +1,11 @@
 import { CustomersService } from './../customers/customers.service';
 import { Injectable, NestMiddleware } from '@nestjs/common';
-import * as nodemailer from 'nodemailer';
-// import emailConfig from './../../mail/emailConfig.js';
+import nodemailer from 'nodemailer';
+import emailConfig from './../../mail/emailConfig.js';
 import { encrypt, decrypt, hash, compare } from '../../secure/crypt.js';
-import * as dotenv from 'dotenv';
 
-dotenv.config();
 @Injectable()
-export class RegisterMiddleware implements NestMiddleware {
+export class EmailConfirmMiddleware implements NestMiddleware {
   constructor(private readonly customerService: CustomersService) {}
   async use(req: Record<string, any>, res: any, next: () => void) {
     const customer = await this.customerService.getCustomerByEmail(
@@ -15,16 +13,7 @@ export class RegisterMiddleware implements NestMiddleware {
     );
     if (customer) res.send(false);
     else {
-      const transform = nodemailer.createTransport({
-        host: process.env.EMAIL_HOST,
-        port: +process.env.EMAIL_PORT,
-        secure: true,
-        auth: {
-          user: process.env.EMAIL_USER,
-          pass: process.env.EMAIL_PASS,
-        },
-      });
-
+      const transform = nodemailer.createTransport(emailConfig);
       const details = {
         from: 'yossipoli@gmail.com',
         to: `${req.body.email}`,
@@ -34,11 +23,7 @@ export class RegisterMiddleware implements NestMiddleware {
       <html>
       <head></head>
       <body>
-          <a href="http://localhost:${
-            process.env.SERVER_PORT
-          }/customers/email-confirm/${/*encrypt(*/ req.body.email /*)*/}"> 
-            Click here to continue your registration to 🐮BUTCHER
-          </a>
+          <a href="http://localhost:${process.env.SERVER_PORT}/${req.body.email}"> Click here to continue your registration to 🐮Butcher !</a>
       </body>
       </html>
       `,
