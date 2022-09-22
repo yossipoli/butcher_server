@@ -20,7 +20,6 @@ export class CustomersService {
 
   async add(customerEmail: string) {
     const newCustomer =  this.waitingConfirmCustomers[customerEmail];
-    console.log(customerEmail)
     if (newCustomer){
       await this.customersRepository.save(newCustomer);
       delete this.waitingConfirmCustomers[newCustomer.email];
