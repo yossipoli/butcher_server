@@ -1,5 +1,5 @@
-import { CreateCustomerDto } from './dto/create-customer.dto';
 /* eslint-disable */
+import { CreateCustomerDto } from './dto/create-customer.dto';
 import { Customers } from './customers.entity';
 import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
