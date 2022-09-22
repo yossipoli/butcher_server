@@ -4,17 +4,29 @@ import { Customers } from './customers.entity';
 import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
+import {encrypt, decrypt, hash, compare } from '../../secure/crypt.js'
 
 @Injectable()
 export class CustomersService {
+  private waitingConfirmCustomers = {}
   constructor(
     @InjectRepository(Customers)
     private customersRepository: Repository<Customers>,
   ) {}
 
-  async add(newCustomer: CreateCustomerDto) {
-    await this.customersRepository.save(newCustomer);
-    return true;
+  addToWaitingConfirmCustomers(customer: CreateCustomerDto) {
+    Object.assign(this.waitingConfirmCustomers,{[customer.email]: customer });
+  }
+
+  async add(customerEmail: string) {
+    const newCustomer =  this.waitingConfirmCustomers[customerEmail];
+    console.log(customerEmail)
+    if (newCustomer){
+      await this.customersRepository.save(newCustomer);
+      delete this.waitingConfirmCustomers[newCustomer.email];
+      return true;
+    }
+    return false
   }
 
   async getCustomers(): Promise<Customers[]> {
