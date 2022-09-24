@@ -15,15 +15,15 @@ export class ImagesService {
   async getAllPictures(_id: number) {
     return await this.imagesRepository.find({
       select: ['src'],
-      where: [{ product_id: _id }],
-      // relations: ['products'],
+      where: [{ productId: _id }],
+      // relations: [images: true],
     });
   }
 
   async getFirstPicture(id: number) {
     return await this.imagesRepository.findOne({
       select: ['src'],
-      where: [{ product_id: id }],
+      where: [{ productId: id }],
     });
   }
 }

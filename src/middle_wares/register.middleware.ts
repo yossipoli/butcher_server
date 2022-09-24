@@ -2,7 +2,7 @@ import { CustomersService } from './../customers/customers.service';
 import { Injectable, NestMiddleware } from '@nestjs/common';
 import * as nodemailer from 'nodemailer';
 // import emailConfig from './../../mail/emailConfig.js';
-import { encrypt, decrypt, hash, compare } from '../../secure/crypt.js';
+import { encrypt, decrypt, hash, compare } from '../customers/secure/crypt.js';
 import * as dotenv from 'dotenv';
 
 dotenv.config();

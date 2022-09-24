@@ -4,7 +4,7 @@ import { Customers } from './customers.entity';
 import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
-import {encrypt, decrypt, hash, compare } from '../../secure/crypt.js'
+import {encrypt, decrypt, hash, compare } from './secure/crypt.js'
 
 @Injectable()
 export class CustomersService {

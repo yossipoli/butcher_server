@@ -1,5 +1,5 @@
-import { Categories } from './../categories/entities/category.entity';
 /* eslint-disable */
+import { Categories } from './../categories/entities/category.entity';
 import { Images } from './../images/images.entity';
 import {
   Entity,
@@ -13,15 +13,18 @@ import {
 export class Products {
   @PrimaryGeneratedColumn()
   id: number;
+  @JoinColumn()
+  @OneToMany(() => Images, (images) => images.productId)
+  images: Images[];
 
   @Column({ length: 30 })
   name: string;
 
   @Column()
   categoryId: number;
-  @JoinColumn()
-  @ManyToOne(() => Categories, (categories) => categories.id)
-  category: Categories[];
+  // @JoinColumn()
+  // @ManyToOne(() => Categories, (categories) => categories.id)
+  // category: Categories[];
 
   @Column('int')
   price: number;
@@ -32,6 +35,5 @@ export class Products {
   @Column({ length: 1000, nullable: true })
   description: string;
 
-  @OneToMany(() => Images, (images) => images.product_id)
-  images: Images[];
+
 }
