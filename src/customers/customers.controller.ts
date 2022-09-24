@@ -35,6 +35,7 @@ export class CustomersController {
   @UsePipes(new ValidationPipe())
   addCustomerToWaitingList(@Body() newCustomer: CreateCustomerDto) {
     this.customersService.addToWaitingConfirmCustomers(newCustomer);
+    return true
   }
 
   @Get('check-cookie')

@@ -18,6 +18,7 @@ export class ProductsService {
   async getProduct(_id: number): Promise<Products> {
     return await this.productsRepository.findOne({
       where: [{ id: _id }],
+      relations: {images: false}
     });
   }
 }

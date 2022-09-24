@@ -16,8 +16,8 @@ export class Images {
   id: number;
 
   @Column()
-  product_id: number;
-  @ManyToOne(() => Products, (product) => product.images)
+  productId: number;
+  @ManyToOne(() => Products, (product) => product.id)
   product: Products;
 
   @Column()
